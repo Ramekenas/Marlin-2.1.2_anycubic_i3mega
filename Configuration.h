@@ -190,10 +190,9 @@
 #if ENABLED(I3MEGA_HAS_TMC2208)
   #define ALL_DRIVERS_TYPE TMC2208_STANDALONE
 #else
-  #define ALL_DRIVERS_TYPE TMC2209_STANDALONE //rokas
+  #define ALL_DRIVERS_TYPE TMC2209 //rokas
 #endif
-//#define X_DRIVER_TYPE  ALL_DRIVERS_TYPE
-#define X_DRIVER_TYPE  TMC2209
+#define X_DRIVER_TYPE  ALL_DRIVERS_TYPE
 #define Y_DRIVER_TYPE  ALL_DRIVERS_TYPE
 #define Z_DRIVER_TYPE  ALL_DRIVERS_TYPE
 //#define I_DRIVER_TYPE  ALL_DRIVERS_TYPE
@@ -845,8 +844,8 @@
   #define PID_FUNCTIONAL_RANGE 10 // If the temperature difference between the target temperature and the actual temperature
                                   // is more than PID_FUNCTIONAL_RANGE then the PID will be shut off and the heater will be set to min/max.
 
-  //#define PID_EDIT_MENU         // Add PID editing to the "Advanced Settings" menu. (~700 bytes of flash)
-  //#define PID_AUTOTUNE_MENU     // Add PID auto-tuning to the "Advanced Settings" menu. (~250 bytes of flash)
+  #define PID_EDIT_MENU         // Add PID editing to the "Advanced Settings" menu. (~700 bytes of flash) //rokas
+  #define PID_AUTOTUNE_MENU     // Add PID auto-tuning to the "Advanced Settings" menu. (~250 bytes of flash) //rokas
 #endif
 
 // @section safety
@@ -1137,9 +1136,9 @@
 #endif
 
 // Mechanical endstop with COM to ground and NC to Signal uses "false" here (most common setup).
-//#define X_MIN_ENDSTOP_INVERTING true  // Set to true to invert the logic of the endstop.
-#define X_MIN_ENDSTOP_INVERTING false  // Set to true to invert the logic of the endstop. //rokas 
-#define Y_MIN_ENDSTOP_INVERTING true  // Set to true to invert the logic of the endstop.
+//#define X_MIN_ENDSTOP_INVERTING true  // Set to true to invert the logic of the endstop. // rokas
+#define X_MIN_ENDSTOP_INVERTING false  // Set to true to invert the logic of the endstop. //rokas for sensorless
+#define Y_MIN_ENDSTOP_INVERTING true  // Set to true to invert the logic of the endstop. //was true without sensorless rokas
 #define Z_MIN_ENDSTOP_INVERTING true  // Set to true to invert the logic of the endstop.
 #define I_MIN_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop.
 #define J_MIN_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop.
@@ -1364,7 +1363,7 @@
 /**
  * Z Servo Probe, such as an endstop switch on a rotating arm.
  */
-//#define Z_PROBE_SERVO_NR 0       // Defaults to SERVO 0 connector.
+#define Z_PROBE_SERVO_NR 3       // Defaults to SERVO 0 connector. //rokas bltouch
 //#define Z_SERVO_ANGLES { 70, 0 } // Z Servo Deploy and Stow angles
 
 /**
@@ -1524,7 +1523,7 @@
  *     |    [-]    |
  *     O-- FRONT --+
  */
-#define NOZZLE_TO_PROBE_OFFSET { 0, -23, -1.54 }    //rokas
+#define NOZZLE_TO_PROBE_OFFSET { 23, 0, -2.7 }    //rokas
 
 // Most probes should stay away from the edges of the bed, but
 // with NOZZLE_AS_PROBE this can be negative for a wider probing area.
@@ -1603,7 +1602,7 @@
  */
 #define Z_CLEARANCE_DEPLOY_PROBE   10 // Z Clearance for Deploy/Stow
 #define Z_CLEARANCE_BETWEEN_PROBES  5 // Z Clearance between probe points
-#define Z_CLEARANCE_MULTI_PROBE     5 // Z Clearance between multiple probes
+#define Z_CLEARANCE_MULTI_PROBE     2 // Z Clearance between multiple probes //rokas
 //#define Z_AFTER_PROBING           5 // Z position after probing is done
 
 #define Z_PROBE_LOW_POINT          -2 // Farthest distance below the trigger-point to go before stopping
@@ -1614,7 +1613,7 @@
 
 // Enable the M48 repeatability test to test probe accuracy
 
-  #define Z_MIN_PROBE_REPEATABILITY_TEST //rokas
+#define Z_MIN_PROBE_REPEATABILITY_TEST //rokas
 
 
 // Before deploy/stow pause for user confirmation
@@ -1683,7 +1682,7 @@
 // @section motion
 
 // Invert the stepper direction. Change (or reverse the motor connector) if an axis goes the wrong way.
-#define INVERT_X_DIR true // set to true for stock drivers or TMC2208 with reversed connectors
+#define INVERT_X_DIR false // set to true for stock drivers or TMC2208 with reversed connectors
 #define INVERT_Y_DIR true // set to false for stock drivers or TMC2208 with reversed connectors
 #define INVERT_Z_DIR true // set to false for stock drivers or TMC2208 with reversed connectors
 //#define INVERT_I_DIR false
@@ -1737,7 +1736,7 @@
 // @section geometry
 
 // The size of the printable area
-#define X_BED_SIZE 210 //rokas
+#define X_BED_SIZE 220 //rokas
 #define Y_BED_SIZE 210 //rokas
 
 // Travel limits (linear=mm, rotational=°) after homing, corresponding to endstop positions.
@@ -1746,7 +1745,7 @@
 #define Z_MIN_POS 0
 #define X_MAX_POS X_BED_SIZE
 #define Y_MAX_POS Y_BED_SIZE
-#define Z_MAX_POS 205  //rokas
+#define Z_MAX_POS 170  //rokas
 //#define I_MIN_POS 0
 //#define I_MAX_POS 50
 //#define J_MIN_POS 0
@@ -2145,7 +2144,7 @@
 #endif
 
 // Homing speeds (linear=mm/min, rotational=°/min)
-#define HOMING_FEEDRATE_MM_M { (50*60), (50*60), (10*60) } //rokas
+#define HOMING_FEEDRATE_MM_M { (50*60), (50*60), (15*60) } //rokas
 
 // Validate that endstops are triggered on homing moves
 #define VALIDATE_HOMING_ENDSTOPS
@@ -2597,7 +2596,7 @@
 // If you have a speaker that can produce tones, enable it here.
 // By default Marlin assumes you have a buzzer with a fixed frequency.
 //
-#define SPEAKER
+//#define SPEAKER //rokas sad
 
 //
 // The duration and frequency for the UI feedback sound.
@@ -3264,14 +3263,14 @@
 // Use software PWM to drive the fan, as for the heaters. This uses a very low frequency
 // which is not as annoying as with the hardware PWM. On the other hand, if this frequency
 // is too low, you should also increment SOFT_PWM_SCALE.
-#define FAN_SOFT_PWM //rokas
+//#define FAN_SOFT_PWM //rokas
 
 // Incrementing this by 1 will double the software PWM frequency,
 // affecting heaters, and the fan if FAN_SOFT_PWM is enabled.
 // However, control resolution will be halved for each increment;
 // at zero value, there are 128 effective control positions.
 // :[0,1,2,3,4,5,6,7]
-#define SOFT_PWM_SCALE 0  //rokas
+#define SOFT_PWM_SCALE 3  //rokas
 
 // If SOFT_PWM_SCALE is set to a value higher than 0, dithering can
 // be used to mitigate the associated resolution loss. If enabled,
@@ -3393,12 +3392,12 @@
  * Set this manually if there are extra servos needing manual control.
  * Set to 0 to turn off servo support.
  */
-//#define NUM_SERVOS 3 // Note: Servo index starts with 0 for M280-M282 commands
+#define NUM_SERVOS 4 // Note: Servo index starts with 0 for M280-M282 commands
 
 // (ms) Delay before the next move will start, to give the servo time to reach its target angle.
 // 300ms is a good value but you can try less delay.
 // If the servo can't reach the requested position, increase it.
-#define SERVO_DELAY { 300 }
+#define SERVO_DELAY { 150,150,150,150 }
 
 // Only power servos during movement, otherwise leave off to prevent jitter
 //#define DEACTIVATE_SERVOS_AFTER_MOVE

@@ -357,7 +357,7 @@
     #define X_SERIAL_TX_PIN                   40
   #endif
   #ifndef X_SERIAL_RX_PIN
-    #define X_SERIAL_RX_PIN                   15 //buvo 63
+    #define X_SERIAL_RX_PIN                   63 //buvo 63 15
   #endif
   #ifndef X2_SERIAL_TX_PIN
     #define X2_SERIAL_TX_PIN                  -1

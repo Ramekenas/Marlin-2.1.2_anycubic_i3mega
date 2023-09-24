@@ -36,6 +36,7 @@
   #define SERVO2_PIN                           4
   #define SERVO3_PIN                           11
 #else
+  #define PS_ON_PIN                            12
   #define SERVO0_PIN                           11
   #define SERVO1_PIN                           6
   #define SERVO2_PIN                           5
@@ -123,26 +124,32 @@
 
 //#define HAS_TMC_UART  true // rokas test
 
+#define Shared_TMC_RX 12 // PS_ON_PIN no fking clue why it doesn't like it ... literraly defined the same as servo pins .....
 #if HAS_TMC_UART
-  #ifndef X_SERIAL_TX_PIN
     #define X_SERIAL_TX_PIN           SERVO1_PIN
-    //#define X_SERIAL_TX_PIN           14 //rokas test
-  #endif
-  #ifndef Y_SERIAL_TX_PIN
-    #define Y_SERIAL_TX_PIN           SERVO0_PIN
-  #endif
-  #ifndef Z_SERIAL_TX_PIN
-    #define Z_SERIAL_TX_PIN           SERVO3_PIN
-  #endif
-  #ifndef E0_SERIAL_TX_PIN
-    #define E0_SERIAL_TX_PIN          SERVO2_PIN
-  #endif
-  #ifndef Z2_SERIAL_TX_PIN                            //rokas
-    #define  Z2_SERIAL_TX_PIN            PS_ON_PIN    //rokas
-    #define  Z2_SERIAL_RX_PIN            20           //rokas  
-  #endif
+    #define X_SERIAL_RX_PIN           Shared_TMC_RX
+
+    #define Y_SERIAL_TX_PIN           SERVO1_PIN
+    #define Y_SERIAL_RX_PIN           Shared_TMC_RX
+
+    #define Z_SERIAL_TX_PIN           SERVO1_PIN
+    #define Z_SERIAL_RX_PIN           Shared_TMC_RX
+
+    #define E0_SERIAL_TX_PIN          SERVO1_PIN
+    #define E0_SERIAL_RX_PIN          Shared_TMC_RX
+
+    #define Z2_SERIAL_TX_PIN          SERVO2_PIN     //rokas
+    //#define Z2_SERIAL_RX_PIN          SERVO0_PIN  //rokas  
+    #define Z2_SERIAL_RX_PIN          66  //rokas  
 #endif
 
+#define X_HARDWARE_SERIAL Serial1 //rokas
+//#define X2_HARDWARE_SERIAL Serial1
+#define Y_HARDWARE_SERIAL Serial1 //rokas
+//#define Y2_HARDWARE_SERIAL Serial1
+#define Z_HARDWARE_SERIAL Serial1 //rokas
+#define Z2_HARDWARE_SERIAL Serial3 //rokas
+#define E0_HARDWARE_SERIAL Serial1 //rokas
 #include "pins_RAMPS.h"
 
 //
