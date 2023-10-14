@@ -1358,14 +1358,14 @@
 // Change values more rapidly when the encoder is rotated faster
 #define ENCODER_RATE_MULTIPLIER //rokas encoder acceleration
 #if ENABLED(ENCODER_RATE_MULTIPLIER)
-  #define ENCODER_10X_STEPS_PER_SEC   14  // (steps/s) Encoder rate for 10x speed
-  #define ENCODER_100X_STEPS_PER_SEC  28  // (steps/s) Encoder rate for 100x speed
+  #define ENCODER_10X_STEPS_PER_SEC   28  // (steps/s) Encoder rate for 10x speed //rokas
+  #define ENCODER_100X_STEPS_PER_SEC  56  // (steps/s) Encoder rate for 100x speed //rokas
 #endif
 
 // Play a beep when the feedrate is changed from the Status Screen
 #define BEEP_ON_FEEDRATE_CHANGE //rokas
 #if ENABLED(BEEP_ON_FEEDRATE_CHANGE)
-  #define FEEDRATE_CHANGE_BEEP_DURATION   10
+  #define FEEDRATE_CHANGE_BEEP_DURATION   50 //rokas
   #define FEEDRATE_CHANGE_BEEP_FREQUENCY 440
 #endif
 
